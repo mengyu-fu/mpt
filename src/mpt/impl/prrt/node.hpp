@@ -43,8 +43,11 @@
 namespace unc::robotics::mpt::impl::prrt {
     template <typename State, typename Traj>
     class Node {
+        using Scalar = typename State::Distance;
+
         State state_;
         Edge<State, Traj> parent_;
+        Scalar traj_length_{0};
 
     public:
         template <typename ... Args>
@@ -52,6 +55,14 @@ namespace unc::robotics::mpt::impl::prrt {
             : state_(std::forward<Args>(args)...)
             , parent_(std::move(traj), parent)
         {
+        }
+
+        Scalar& length() {
+            return traj_length_;
+        }
+
+        const Scalar& length() const {
+            return traj_length_;
         }
 
         const State& state() const {

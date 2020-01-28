@@ -61,6 +61,7 @@ namespace unc::robotics::mpt {
 
     public:
         using Base::Base;
+        using Distance = Scalar;
 
         Eigen::Quaternion<Scalar>& rotation() {
             return std::get<0>(*this);
